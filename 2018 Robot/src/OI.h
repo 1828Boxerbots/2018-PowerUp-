@@ -1,5 +1,6 @@
 #include <WPILib.h>
 #include <XboxController.h>
+#include <Joystick.h>
 
 #include "RobotMap.h"
 

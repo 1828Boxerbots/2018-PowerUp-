@@ -5,6 +5,13 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+/*----------------------------------------------------------------------------*/
+/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
+/* Open Source Software - may be modified and shared by FRC teams. The code   */
+/* must be accompanied by the FIRST BSD license file in the root directory of */
+/* the project.                                                               */
+/*----------------------------------------------------------------------------*/
+
 #include <WPILib.h>
 #include <Commands/Command.h>
 #include <Commands/Scheduler.h>
@@ -15,10 +22,17 @@
 
 #include "Commands/ExampleCommand.h"
 #include "Commands/MyAutoCommand.h"
+#include "Subsystems/DriveTrain.h"
 
-class Robot : public frc::TimedRobot {
+class Robot : public frc::TimedRobot
+{
+
 public:
-	void RobotInit() override {
+	constexpr static DriveTrain* drivetrain = NULL;
+
+	void RobotInit() override
+	{
+
 		m_chooser.AddDefault("Default Auto", &m_defaultAuto);
 		m_chooser.AddObject("My Auto", &m_myAuto);
 		frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
@@ -94,5 +108,6 @@ private:
 	MyAutoCommand m_myAuto;
 	frc::SendableChooser<frc::Command*> m_chooser;
 };
+
 
 START_ROBOT_CLASS(Robot)

@@ -1,3 +1,5 @@
+#include <WPILib.h>
+
 #include "DriveTrain.h"
 #include "../RobotMap.h"
 #include "Util.h"
@@ -7,7 +9,7 @@ using namespace util;
 
 DriveTrain::DriveTrain() : Subsystem("ExampleSubsystem")
 {
-	m_joystick = 0;
+
 }
 
 void DriveTrain::InitDefaultCommand() {
@@ -18,26 +20,33 @@ void DriveTrain::InitDefaultCommand() {
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
 
-void DriveTrain::TeleopDrive()
+void DriveTrain::ResetMotors()
+{
+	m_leftDriveMotor.Set(0);
+	m_rightDriveMotor.Set(0);
+}
+
+void DriveTrain::StopMotors()
+{
+	/* Implement a PID to Ramp the motors down */
+
+	m_leftDriveMotor.Set(0);
+	m_rightDriveMotor.Set(0);
+}
+
+void DriveTrain::TeleopDrive(double joystick)
 {
 
 	/* inverts the left Motor and keeps the right motor non-inverted */
 	m_leftDriveMotor.SetInverted(true);
 	m_rightDriveMotor.SetInverted(false);
 
-	/* Creates a variable that takes on the combined value of the X and Y axis of the right Joystick and limits that value to a certain
-	 * number.
-	 */
-	m_joystick = m_controller.GetX(GenericHID::kRightHand) + m_controller.GetY(GenericHID::kRightHand);
-	m_joystick = Limit(0.5, -0.5, m_joystick);
-
-
-	m_leftDriveMotor.Set(-m_joystick);
-	m_rightDriveMotor.Set(-m_joystick);
+	m_leftDriveMotor.Set(-joystick);
+	m_rightDriveMotor.Set(-joystick);
 
 }
 
-void DriveTrain::AutoDriveTimed()
+void DriveTrain::AutoDriveTimed(double motorValue)
 {
 	/* Reset on Startup */
 	timer->Reset();
@@ -52,8 +61,8 @@ void DriveTrain::AutoDriveTimed()
 		m_leftDriveMotor.SetInverted(true);
 
 		/* Set the drive motors to run at 50% power for duration on the timer */
-		m_leftDriveMotor.Set(0.5);
-		m_rightDriveMotor.Set(0.5);
+		m_leftDriveMotor.Set(motorValue);
+		m_rightDriveMotor.Set(motorValue);
 	}
 	/* Enter once time is no longer less than or equal to 15 seconds */
 	else

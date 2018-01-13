@@ -21,17 +21,15 @@ private:
 	Encoder *m_leftDriveEncoder = new Encoder(LEFT_DRIVE_ENCODER_PORT, LEFT_DRIVE_ENCODER_PORT, false, Encoder::EncodingType::k4X);
 	Encoder *m_rightDriveEncoder = new Encoder(RIGHT_DRIVE_ENCODER_PORT, RIGHT_DRIVE_ENCODER_PORT, false, Encoder::EncodingType::k4X);
 
-	XboxController m_controller {CONTROLLER_PORT};
-
-	double m_joystick;
-
 	Timer *timer = new Timer();
 
 public:
 	DriveTrain();
 	void InitDefaultCommand();
-	void TeleopDrive();
-	void AutoDriveTimed();
+	void ResetMotors();
+	void StopMotors();
+	void TeleopDrive(double joystick);
+	void AutoDriveTimed(double motorValue);
 	void AutoDrive();
 };
 

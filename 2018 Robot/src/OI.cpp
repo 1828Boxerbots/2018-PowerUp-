@@ -11,10 +11,7 @@
 
 OI::OI() {
 	// Process operator interface input here.
-	controller = new Joystick(1);
+	double joystick = controller.GetX(GenericHID::kLeftHand) + controller.GetY(GenericHID::kLeftHand);
 
-	JoystickButton* button1 = new JoystickButton(controller, 6),
-					button2 = new JoystickButton(controller, 5);
 
-	button1->WhenPressed(new TeleopDriveCmdGrp());
 }
