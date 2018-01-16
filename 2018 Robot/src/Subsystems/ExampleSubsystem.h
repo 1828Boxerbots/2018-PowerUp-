@@ -5,20 +5,16 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "OI.h"
+#pragma once
 
-#include <WPILib.h>
+#include <Commands/Subsystem.h>
 
-using namespace frc;
+class ExampleSubsystem : public frc::Subsystem {
+public:
+	ExampleSubsystem();
+	void InitDefaultCommand() override;
 
-OI::OI()
-{
-	// Process operator interface input here.
-
-}
-
-XboxController* OI::GetJoystick()
-{
-	return &controller;
-}
-
+private:
+	// It's desirable that everything possible under private except
+	// for methods that implement subsystem capabilities
+};

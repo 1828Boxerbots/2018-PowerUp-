@@ -5,20 +5,17 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "OI.h"
+#include "ExampleSubsystem.h"
 
-#include <WPILib.h>
+#include "../RobotMap.h"
 
-using namespace frc;
+ExampleSubsystem::ExampleSubsystem()
+    : frc::Subsystem("ExampleSubsystem") {}
 
-OI::OI()
-{
-	// Process operator interface input here.
-
+void ExampleSubsystem::InitDefaultCommand() {
+	// Set the default command for a subsystem here.
+	// SetDefaultCommand(new MySpecialCommand());
 }
 
-XboxController* OI::GetJoystick()
-{
-	return &controller;
-}
-
+// Put methods for controlling this subsystem
+// here. Call these from Commands.
