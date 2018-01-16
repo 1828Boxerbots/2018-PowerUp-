@@ -36,16 +36,15 @@ void DriveTrain::StopMotors()
 	m_rightDriveMotor.Set(0);
 }
 
-void DriveTrain::TeleopDrive(double joystick)
+void DriveTrain::Drive(double left, double right)
 {
+	drive.ArcadeDrive(left, right);
+}
 
-	/* inverts the left Motor and keeps the right motor non-inverted */
-	m_leftDriveMotor.SetInverted(true);
-	m_rightDriveMotor.SetInverted(false);
-
-	m_leftDriveMotor.Set(-joystick);
-	m_rightDriveMotor.Set(-joystick);
-
+void DriveTrain::TeleopDrive(XboxController* controller)
+{
+	Drive(-controller->GetX(GenericHID::kRightHand),
+			-controller->GetY(GenericHID::kRightHand));
 }
 
 void DriveTrain::AutoDriveTimed(double motorValue)

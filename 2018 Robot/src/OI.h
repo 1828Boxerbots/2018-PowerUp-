@@ -16,6 +16,7 @@
 class OI {
 public:
 	OI();
+	XboxController* GetJoystick();
 
 private:
 	XboxController controller {CONTROLLER_PORT};

@@ -1,14 +1,16 @@
+#ifndef DriveTrain_H
+#define DriveTrain_H
+
+#include <WPILib.h>
+
 #include <Spark.h>
 #include <XboxController.h>
 #include <Timer.h>
 #include <Encoder.h>
 #include <PIDController.h>
-#include <PIDSource.h>
+#include <Drive/DifferentialDrive.h>
 
 #include "RobotMap.h"
-
-#ifndef DriveTrain_H
-#define DriveTrain_H
 
 #include <Commands/Subsystem.h>
 
@@ -23,12 +25,15 @@ private:
 
 	Timer *timer = new Timer();
 
+	DifferentialDrive drive {m_leftDriveMotor, m_rightDriveMotor};
+
 public:
 	DriveTrain();
 	void InitDefaultCommand();
 	void ResetMotors();
 	void StopMotors();
-	void TeleopDrive(double joystick);
+	void Drive(double left, double right);
+	void TeleopDrive(XboxController* controller);
 	void AutoDriveTimed(double motorValue);
 	void AutoDrive();
 };

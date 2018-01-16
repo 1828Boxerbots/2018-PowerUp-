@@ -9,9 +9,16 @@
 
 #include <WPILib.h>
 
-OI::OI() {
-	// Process operator interface input here.
-	double joystick = controller.GetX(GenericHID::kLeftHand) + controller.GetY(GenericHID::kLeftHand);
+using namespace frc;
 
+OI::OI()
+{
+	// Process operator interface input here.
 
 }
+
+XboxController* OI::GetJoystick()
+{
+	return &controller;
+}
+
