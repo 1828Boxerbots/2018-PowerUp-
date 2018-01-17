@@ -23,6 +23,7 @@
 #include "Commands/TeleopDriveCmd.h"
 
 #include "Subsystems/DriveTrain.h"
+#include "Subsystems/Wrist.h"
 
 #include "OI.h"
 
@@ -34,6 +35,7 @@ class Robot : public frc::TimedRobot
 public:
 
 	static shared_ptr<DriveTrain> drivetrain;
+	static shared_ptr<Wrist> wrist;
 	static shared_ptr<OI> oi;
 
 private:

@@ -18,6 +18,7 @@
 #include <iostream>
 
 shared_ptr<DriveTrain> Robot::drivetrain = make_shared<DriveTrain>();
+shared_ptr<Wrist> Robot::wrist = make_shared<Wrist>();
 shared_ptr<OI> Robot::oi = make_shared<OI>();
 
 void Robot::RobotInit()

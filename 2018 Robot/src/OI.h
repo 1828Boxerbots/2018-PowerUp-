@@ -1,6 +1,5 @@
 #include <WPILib.h>
 #include <XboxController.h>
-#include <Joystick.h>
 
 #include "RobotMap.h"
 
@@ -20,4 +19,6 @@ public:
 
 private:
 	XboxController controller {CONTROLLER_PORT};
+
+	JoystickButton m_leftBumperButton{&controller, 5};
 };
