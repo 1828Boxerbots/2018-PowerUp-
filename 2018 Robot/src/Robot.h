@@ -19,10 +19,12 @@
 #include <SmartDashboard/SmartDashboard.h>
 #include <TimedRobot.h>
 
-#include "Commands/AutoDriveCmd.h"
-#include "Commands/TeleopDriveCmd.h"
+#include "Commands/Cmd/AutoDriveCmd.h"
+#include "Commands/Cmd/TeleopDriveCmd.h"
 
 #include "Subsystems/DriveTrain.h"
+#include "Subsystems/Wrist.h"
+#include "Subsystems/OnBoardCompressor.h"
 
 #include "OI.h"
 
@@ -34,6 +36,9 @@ class Robot : public frc::TimedRobot
 public:
 
 	static shared_ptr<DriveTrain> drivetrain;
+	static shared_ptr<Wrist> wrist;
+	static shared_ptr<OnBoardCompressor> onboardcompressor;
+
 	static shared_ptr<OI> oi;
 
 private:

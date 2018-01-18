@@ -9,11 +9,16 @@
 
 #include <WPILib.h>
 
+#include "Commands/Cmd/WristExtendCmd.h"
+#include "Commands/Cmd/WristRetractCmd.h"
+
 using namespace frc;
 
 OI::OI()
 {
 	// Process operator interface input here.
+	m_leftBumperButton.WhenPressed(new WristExtend());
+	m_leftBumperButton.WhenReleased(new WristRetractCmd());
 
 }
 

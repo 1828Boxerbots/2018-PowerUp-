@@ -17,12 +17,17 @@
 
 #include <iostream>
 
+using namespace std;
+
 shared_ptr<DriveTrain> Robot::drivetrain = make_shared<DriveTrain>();
+shared_ptr<Wrist> Robot::wrist = make_shared<Wrist>();
+shared_ptr<OnBoardCompressor> Robot::onboardcompressor = make_shared<OnBoardCompressor>();
+
 shared_ptr<OI> Robot::oi = make_shared<OI>();
 
 void Robot::RobotInit()
 {
-
+	cout << "Booting Up ..." << endl;
 }
 
 /**
@@ -34,7 +39,7 @@ void Robot::RobotInit()
  */
 void Robot::DisabledInit()
 {
-
+	cout << "Starting Disabled" << endl;
 }
 
 void Robot::DisabledPeriodic()
@@ -59,6 +64,8 @@ void Robot::DisabledPeriodic()
 void Robot::AutonomousInit()
 {
 	m_autoDriveCmd.Start();
+
+	cout << "Starting Autonomous ... " << endl;
 }
 
 void Robot::AutonomousPeriodic()
@@ -68,9 +75,11 @@ void Robot::AutonomousPeriodic()
 
 void Robot::TeleopInit()
 {
-		m_autoDriveCmd.Cancel();
+	m_autoDriveCmd.Cancel();
 
-		m_teleopDriveCmd.Start();
+	m_teleopDriveCmd.Start();
+
+	cout << "Starting Teleop ... " << endl;
 }
 
 void Robot::TeleopPeriodic()
