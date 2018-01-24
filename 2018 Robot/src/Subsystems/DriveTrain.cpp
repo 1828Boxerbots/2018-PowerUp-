@@ -1,13 +1,9 @@
-/* testing github */
-
 #include <WPILib.h>
 
 #include "DriveTrain.h"
 #include "../RobotMap.h"
-#include "Util.h"
 
 using namespace frc;
-using namespace util;
 
 DriveTrain::DriveTrain() : Subsystem("ExampleSubsystem")
 {
@@ -21,6 +17,11 @@ void DriveTrain::InitDefaultCommand() {
 
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
+
+void DriveTrain::InvertMotor()
+{
+	m_leftDriveMotor.SetInverted(true);
+}
 
 void DriveTrain::ResetMotors()
 {
@@ -43,14 +44,19 @@ void DriveTrain::Drive(double left, double right)
 
 void DriveTrain::TeleopDrive(XboxController* controller)
 {
-	Drive(-controller->GetX(GenericHID::kRightHand),
-			-controller->GetY(GenericHID::kRightHand));
+	double joyY = controller->GetY(GenericHID::kRightHand);
+	double joyX = controller->GetX(GenericHID::kRightHand);
+
+	joyX = Limit(0.9, -0.9, joyX);
+	joyY = Limit(0.9, -0.9, joyY);
+
+	Drive(-joyY,joyX);
 }
 
 void DriveTrain::AutoDriveTimed(double motorValue)
 {
 	/* Reset on Startup */
-	timer->Reset();
+	//timer->Reset();
 
 	/* Start the timer */
 	timer->Start();
@@ -66,11 +72,11 @@ void DriveTrain::AutoDriveTimed(double motorValue)
 		m_rightDriveMotor.Set(motorValue);
 	}
 	/* Enter once time is no longer less than or equal to 15 seconds */
-	else
+	/*else
 	{
 		timer->Reset();
 	}
-
+*/
 }
 
 void DriveTrain::AutoDrive()
@@ -79,9 +85,45 @@ void DriveTrain::AutoDrive()
 	m_leftDriveMotor.SetInverted(true);
 
 	/* Set the drive motors to run at 75%*/
-	m_leftDriveMotor.Set(0.75);
-	m_rightDriveMotor.Set(0.75);
+	m_leftDriveMotor.Set(1);
+	m_rightDriveMotor.Set(1);
 
 	/*Waits for a little bit to at lest allow the entire loop to execute */
-	Wait(0.1);
+	//Wait(0.001);
+}
+
+/*void DriveTrain::StartTimer()
+{
+	timer->Start();
+}
+*/
+
+double DriveTrain::GetTimer()
+{
+	timer->Reset();
+
+	timer->Start();
+
+	double getTime = timer->Get();
+	return getTime;
+}
+
+double DriveTrain::Limit (double upperLimit, double lowerLimit, double value)
+{
+	if(value >= upperLimit)
+	{
+		value = upperLimit;
+		return value;
+	}
+
+	if(value <= lowerLimit)
+	{
+		value = lowerLimit;
+		return value;
+	}
+
+	else
+	{
+		return value;
+	}
 }

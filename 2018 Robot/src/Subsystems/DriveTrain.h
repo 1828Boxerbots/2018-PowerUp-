@@ -36,6 +36,10 @@ public:
 	void TeleopDrive(XboxController* controller);
 	void AutoDriveTimed(double motorValue);
 	void AutoDrive();
+	void InvertMotor();
+	//void StartTimer();
+	double GetTimer();
+	double Limit(double upperLimit, double lowerLimit, double value);
 };
 
 #endif  // DriveTrain_H

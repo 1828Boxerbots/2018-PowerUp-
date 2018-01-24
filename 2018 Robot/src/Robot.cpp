@@ -17,12 +17,21 @@
 
 #include <iostream>
 
+using namespace frc;
+using namespace std;
+
 shared_ptr<DriveTrain> Robot::drivetrain = make_shared<DriveTrain>();
+shared_ptr<Wrist> Robot::wrist = make_shared<Wrist>();
+shared_ptr<OnBoardCompressor> Robot::onboardcompressor = make_shared<OnBoardCompressor>();
+shared_ptr<Climber> Robot::climber = make_shared<Climber>();
+shared_ptr<Claw> Robot::claw = make_shared<Claw>();
+
 shared_ptr<OI> Robot::oi = make_shared<OI>();
 
 void Robot::RobotInit()
 {
-
+	m_compressorCmdGrp.Start();
+	cout << "Booting Up ..." << endl;
 }
 
 /**
@@ -34,7 +43,7 @@ void Robot::RobotInit()
  */
 void Robot::DisabledInit()
 {
-
+	cout << "Starting Disabled" << endl;
 }
 
 void Robot::DisabledPeriodic()
@@ -58,24 +67,35 @@ void Robot::DisabledPeriodic()
  */
 void Robot::AutonomousInit()
 {
+	m_compressorCmdGrp.Start();
 	m_autoDriveCmd.Start();
+
+	cout << "Starting Autonomous ... " << endl;
 }
 
 void Robot::AutonomousPeriodic()
 {
 	frc::Scheduler::GetInstance()->Run();
+
+	//m_compressorCmdGrp.Start();
 }
 
 void Robot::TeleopInit()
 {
-		m_autoDriveCmd.Cancel();
+	m_autoDriveCmd.Cancel();
 
-		m_teleopDriveCmd.Start();
+	m_compressorCmdGrp.Start();
+
+	m_teleopDriveCmd.Start();
+
+	cout << "Starting Teleop ... " << endl;
 }
 
 void Robot::TeleopPeriodic()
 {
 	frc::Scheduler::GetInstance()->Run();
+
+	m_compressorCmdGrp.Start();
 }
 
 void Robot::TestPeriodic()

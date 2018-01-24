@@ -27,10 +27,27 @@
 /* PWM Ports */
 constexpr int LEFT_DRIVE_MOTOR_PORT = 0;
 constexpr int RIGHT_DRIVE_MOTOR_PORT = 1;
+constexpr int GANTRY_MOTOR_PORT = 2;
 
 constexpr int LEFT_DRIVE_ENCODER_PORT = 4;
 constexpr int RIGHT_DRIVE_ENCODER_PORT = 5;
 
+/* Compressor Port */
+constexpr int COMPRESSOR_PORT = 0;
+
+/* Solenoid Ports */
+constexpr int LEFT_CLAW_FORWARD_SOLENOID_PORT = 0;
+constexpr int LEFT_CLAW_REVERSE_SOLENOID_PORT = 1;
+constexpr int RIGHT_CLAW_FORWARD_SOLENOID_PORT = 2;
+constexpr int RIGHT_CLAW_REVERSE_SOLENOID_PORT = 3;
+constexpr int WRIST_FORWARD_SOLENOID_PORT = 4;
+constexpr int WRIST_REVERSE_SOLENOID_PORT = 5;
+constexpr int CLIMB_FORWARD_SOLENOID_PORT = 6;
+constexpr int CLIMB_REVERSE_SOLENOID_PORT = 7;
+
 /* USB Ports */
 constexpr int CONTROLLER_PORT = 0;
 constexpr int SWITCH_BOARD_PORT = 1;
+
+/* DIO Ports */
+constexpr int CLAW_DIO_PORT = 0;
