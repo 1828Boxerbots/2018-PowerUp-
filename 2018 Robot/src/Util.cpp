@@ -7,16 +7,15 @@
 
 #include "Util.h"
 
-
 double util::Limit (double upperLimit, double lowerLimit, double value)
 {
-	if(value <= upperLimit)
+	if(value >= upperLimit)
 	{
 		value = upperLimit;
 		return value;
 	}
 
-	if(value >= lowerLimit)
+	if(value <= lowerLimit)
 	{
 		value = lowerLimit;
 		return value;
