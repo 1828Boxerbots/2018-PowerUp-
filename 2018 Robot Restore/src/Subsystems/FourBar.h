@@ -17,7 +17,18 @@
 using namespace frc;
 using namespace std;
 
-class FourBar : public Subsystem {
+class FourBar : public Subsystem
+{
+public:
+	FourBar();
+	void InitDefaultCommand();
+	void Movement(XboxController* controller);
+	void SetInversions();
+	void EnablePIDController();
+	void PIDControllerInit();
+	void SetAngle(int setpoint);
+
+	static constexpr int SETPOINTSNUMBER = 3;
 private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
@@ -43,15 +54,7 @@ private:
 	int m_index = 0;
 	bool m_previousValue = false;
 
-	static constexpr array<double, 3> kSetPoints = {0.0, 2.6, 4.3};
-
-public:
-	FourBar();
-	void InitDefaultCommand();
-	void Movement(XboxController* controller);
-	void SetInversions();
-	void EnablePIDController();
-	void PIDControllerInit();
+	static constexpr array<double, SETPOINTSNUMBER> kSetPoints = {0.0, 2.6, 4.3};
 };
 
 #endif  // FourBar_H

@@ -7,7 +7,8 @@
 
 #pragma once
 
-namespace util
+namespace Util
 {
 	double Limit(double upperLimit, double lowerLimit, double leftDeadZone, double rightDeadZone, double value);
+	bool NotEqual(double current, double target, double delta = 0.1);
 }

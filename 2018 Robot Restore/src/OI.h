@@ -9,6 +9,7 @@
 
 #include <XboxController.h>
 #include "RobotMap.h"
+#include "Commands/Cmd/ClawOpenCmd.h"
 
 using namespace frc;
 

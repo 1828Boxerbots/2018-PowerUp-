@@ -13,7 +13,8 @@
 using namespace frc;
 using namespace std;
 
-class OnBoardCompressor : public Subsystem {
+class OnBoardCompressor : public Subsystem
+{
 private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities

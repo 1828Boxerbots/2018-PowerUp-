@@ -10,6 +10,26 @@ Gantry::Gantry() : Subsystem("ExampleSubsystem")
 
 }
 
+double Gantry::Limit2(double upperLimit, double lowerLimit, double leftDeadZone, double rightDeadZone, double value)
+{
+	if(value >= upperLimit)
+	{
+		value = upperLimit;
+		return value;
+	}
+	if(value <= lowerLimit)
+	{
+		value = lowerLimit;
+		return value;
+	}
+	if((value > leftDeadZone) && (value < rightDeadZone))
+	{
+		value = 0.0;
+		return value;
+	}
+	return value;
+}
+
 void Gantry::InitDefaultCommand()
 {
 	// Set the default command for a subsystem here.
@@ -23,18 +43,32 @@ bool Gantry::UpMovement(XboxController* trigger)
 {
 	double triggerAxis = trigger->GetTriggerAxis(GenericHID::kRightHand);
 
-	m_gantryMotor.Set(triggerAxis);
+	SmartDashboard::PutNumber("RightTrigger", triggerAxis);
 
-	return triggerAxis >= 0.1;
+	//triggerAxis = Limit2(1.0, 0.1, 0, 0.1, triggerAxis);
+
+	bool isTriggered = triggerAxis >= 0.01;
+	if (isTriggered)
+	{
+		m_gantryMotor.Set(-triggerAxis);
+	}
+	return isTriggered;
 }
 
 bool Gantry::DownMovement(XboxController* trigger)
 {
 	double triggerAxis = trigger->GetTriggerAxis(GenericHID::kLeftHand);
 
-	m_gantryMotor.Set(-triggerAxis);
+	SmartDashboard::PutNumber("LeftTrigger", triggerAxis);
 
-	return triggerAxis >= 0.1;
+	//triggerAxis = Limit2(1.0, 0.1, 0, 0.1, triggerAxis);
+
+	bool isTriggered = triggerAxis >= 0.01;
+	if (isTriggered)
+	{
+		m_gantryMotor.Set(-triggerAxis);
+	}
+	return isTriggered;
 }
 
 void Gantry::StopMotors()
@@ -45,50 +79,37 @@ void Gantry::StopMotors()
 bool Gantry::UpperLimitSwitchTripped()
 {
 	bool flag = upperLimitSwitch.Get();
-	Wait(TIME);
-	return flag;
+	//Wait(TIME);
+	return !flag;
 }
 
 bool Gantry::LowerLimitSwitchTripped()
 {
+
 	bool flag = lowerLimitSwitch.Get();
-	Wait(TIME);
-	return flag;
-}
-
-bool Gantry::UpperHallTripped()
-{
-	bool flag = m_upperHallSensor.Get();
-	Wait(TIME);
-	return flag;
-}
-
-bool Gantry::LowerHallTripped()
-{
-	bool flag = m_lowerHallSensor.Get();
-	Wait(TIME);
-	return flag;
+	//Wait(TIME);
+	return !flag;
 }
 
 bool Gantry::UpperPhotoSensorTripped()
 {
 	bool flag = m_upperPhotoSensor.Get();
-	Wait(TIME);
+	//Wait(TIME);
 	return flag;
 }
 
 bool Gantry::LowerPhotoSensorTripped()
 {
 	bool flag = m_lowerPhotoSensor.Get();
-	Wait(TIME);
+	//Wait(TIME);
 	return flag;
 
 }
 
 double Gantry::ReturnEncoder()
 {
-	//return m_gantryEncoder->Get();
-	return 0;
+	return m_gantryEncoder->Get();
+	//return 0;
 }
 
 bool Gantry::ReturnLowerLimits()
@@ -101,4 +122,19 @@ bool Gantry::ReturnUpperLimits()
 {
 	bool variable = UpperLimitSwitchTripped() && UpperPhotoSensorTripped();
 	return variable;
+}
+
+void Gantry::GantryTest(XboxController* controller)
+{
+	double joystick = controller->GetY(GenericHID::kLeftHand);
+
+	m_gantryMotor.Set(-joystick);
+}
+
+void Gantry::PrintVars()
+{
+	SmartDashboard::PutBoolean("UpLimitSwitch", UpperLimitSwitchTripped());
+	SmartDashboard::PutBoolean("LowLimitSwitch", LowerLimitSwitchTripped());
+	SmartDashboard::PutBoolean("UpPhotoSwitch", UpperPhotoSensorTripped());
+	SmartDashboard::PutBoolean("LowPhotoSwitch", LowerPhotoSensorTripped());
 }

@@ -60,11 +60,11 @@ void Robot::DisabledPeriodic()
 	 * chooser code above (like the commented example) or additional
 	 * comparisons
 	 * to the if-else structure below with additional strings & commands.
+	 * hi if you see this ryan lol
 	 */
 void Robot::AutonomousInit()
 {
-	m_autoDriveCmd.Start();
-	m_compressorStartCmd.Start();
+
 }
 
 void Robot::AutonomousPeriodic()
@@ -74,18 +74,24 @@ void Robot::AutonomousPeriodic()
 
 void Robot::TeleopInit()
 {
-	m_autoDriveCmd.Cancel();
+	m_drive.Start();
 
-	//m_compressorStartCmd.Start();
+	//m_fourBar.Start();
 
-	m_fourBarCmd.Start();
-	m_gantryMovementCmd.Start();
-	m_teleopDriveCmd.Start();
+	//m_gantry.Start();
+
+	time = new Timer();
+	previousTime = time->Get();
 }
 
 void Robot::TeleopPeriodic()
 {
 	frc::Scheduler::GetInstance()->Run();
+
+	double loopTime = time->Get() - previousTime;
+	previousTime = time->Get();
+
+	SmartDashboard::PutNumber("Teleop Loop Time: ", loopTime * 1000);
 }
 
 void Robot::TestPeriodic()

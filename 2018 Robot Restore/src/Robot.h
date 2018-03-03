@@ -15,13 +15,11 @@
 #include <SmartDashboard/SendableChooser.h>
 #include <SmartDashboard/SmartDashboard.h>
 #include <TimedRobot.h>
+#include <Timer.h>
 
-#include "Commands/Cmd/AutoDrive.h"
 #include "Commands/Cmd/TeleopDriveCmd.h"
 #include "Commands/Cmd/GantryMovementCmd.h"
 #include "Commands/Cmd/FourBarCmd.h"
-
-#include "Commands/Cmd/CompressorStartCmd.h"
 
 #include "Subsystems/Drivetrain.h"
 #include "Subsystems/Wrist.h"
@@ -54,13 +52,13 @@ public:
 
 private:
 
-	TeleopDriveCmd m_teleopDriveCmd;
+	TeleopDriveCmd m_drive;
+	GantryMovementCmd m_gantry;
+	FourBarCmd m_fourBar;
 
-	AutoDrive m_autoDriveCmd;
+	Timer* time = NULL;
 
-	GantryMovementCmd m_gantryMovementCmd;
-	FourBarCmd m_fourBarCmd;
-	CompressorStartCmd m_compressorStartCmd;
+	double previousTime = 0;
 
 	void RobotInit() override;
 	void DisabledInit() override;

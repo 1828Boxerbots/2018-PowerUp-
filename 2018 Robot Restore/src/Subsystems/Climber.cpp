@@ -3,11 +3,13 @@
 
 using namespace frc;
 
-Climber::Climber() : Subsystem("ExampleSubsystem") {
+Climber::Climber() : Subsystem("ExampleSubsystem")
+{
 
 }
 
-void Climber::InitDefaultCommand() {
+void Climber::InitDefaultCommand()
+{
 	// Set the default command for a subsystem here.
 	// SetDefaultCommand(new MySpecialCommand());
 }

@@ -1,45 +1,37 @@
-#include "GrabBoxCmd.h"
+#include "GantryTestCmd.h"
 #include "Robot.h"
 
-GrabBoxCmd::GrabBoxCmd() {
+GantryTestCmd::GantryTestCmd()
+{
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
-	Requires(Robot::claw.get());
+	Requires(Robot::gantry.get());
 }
 
 // Called just before this Command runs the first time
-void GrabBoxCmd::Initialize()
+void GantryTestCmd::Initialize()
 {
 
 }
 
 // Called repeatedly when this Command is scheduled to run
-void GrabBoxCmd::Execute()
+void GantryTestCmd::Execute()
 {
-
+	Robot::gantry->GantryTest(Robot::oi->GetJoystick());
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool GrabBoxCmd::IsFinished()
-{
-	if(Robot::oi->GetJoystick()->GetBButtonPressed())
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+bool GantryTestCmd::IsFinished() {
+	return false;
 }
 
 // Called once after isFinished returns true
-void GrabBoxCmd::End()
-{
-	Robot::claw->OpenClaw(Robot::oi->GetJoystick());
+void GantryTestCmd::End() {
+
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void GrabBoxCmd::Interrupted() {
+void GantryTestCmd::Interrupted() {
 
 }

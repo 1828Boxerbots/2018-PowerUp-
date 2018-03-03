@@ -1,7 +1,6 @@
 #include "TeleopDriveCmd.h"
 
 #include "Robot.h"
-#include "OI.h"
 
 TeleopDriveCmd::TeleopDriveCmd()
 {
@@ -14,14 +13,16 @@ TeleopDriveCmd::TeleopDriveCmd()
 void TeleopDriveCmd::Initialize()
 {
 	Robot::drivetrain->MotorInitialization();
-	Robot::drivetrain->PIDControllerInit();
-	Robot::drivetrain->EnablePIDController();
+	//Robot::drivetrain->PIDControllerInit();
+
 }
 
 // Called repeatedly when this Command is scheduled to run
 void TeleopDriveCmd::Execute()
 {
-	Robot::drivetrain->PIDDrive(Robot::oi->GetJoystick());
+	//Robot::drivetrain->TeleopDrive(Robot::oi->GetJoystick());
+	//Robot::drivetrain->EnablePIDController();
+	Robot::drivetrain->TeleopDrive(Robot::oi->GetJoystick());
 }
 
 // Make this return true when this Command no longer needs to run execute()

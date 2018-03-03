@@ -25,11 +25,13 @@
 // constexpr int kRangeFinderModule = 1;
 
 /*PWM Ports*/
-constexpr int LEFT_DRIVE_MOTOR_PORT = 0;
-constexpr int RIGHT_DRIVE_MOTOR_PORT = 1;
-constexpr int GANTRY_MOTOR_PORT = 4;
-constexpr int LEFT_FOUR_BAR_MOTOR_PORT = 2;
-constexpr int RIGHT_FOUR_BAR_MOTOR_PORT = 3;
+constexpr int LEFT_DRIVE_MOTOR_PORT = 3;
+constexpr int LEFT_DRIVE_TEST_PORT = 9;
+constexpr int RIGHT_DRIVE_MOTOR_PORT = 4;
+constexpr int RIGHT_DRIVE_TEST_PORT = 9;
+constexpr int GANTRY_MOTOR_PORT = 2;
+constexpr int LEFT_FOUR_BAR_MOTOR_PORT = 0;
+constexpr int RIGHT_FOUR_BAR_MOTOR_PORT = 1;
 
 /*Compressor Port*/
 constexpr int COMPRESSOR_PORT = 0;
@@ -49,20 +51,17 @@ constexpr int CONTROLLER_PORT = 0;
 constexpr int SWITCH_BOARD_PORT = 1;
 
 /*DIO Port*/
-constexpr int UPPER_LIMIT_PORT = 8;
-constexpr int LOWER_LIMIT_PORT = 9;
-constexpr int CLAW_DIO_PORT = 7;
-constexpr int UPPER_HALL_EFFECT_SENSOR_PORT = 0;
-constexpr int LOWER_HALL_EFFECT_SENSOR_PORT = 0;
-constexpr int UPPER_GANTRY_PHOTO_SENSOR_PORT = 4;
-constexpr int LOWER_GANTRY_PHOTO_SENSOR_PORT = 5;
+constexpr int UPPER_LIMIT_PORT = 9;
+constexpr int LOWER_LIMIT_PORT = 8;
+constexpr int UPPER_GANTRY_PHOTO_SENSOR_PORT = 6;
+constexpr int LOWER_GANTRY_PHOTO_SENSOR_PORT = 7;
 
 constexpr int LEFT_DRIVE_ENCODER_PORT_A = 0;
 constexpr int LEFT_DRIVE_ENCODER_PORT_B = 1;
 constexpr int RIGHT_DRIVE_ENCODER_PORT_A = 2;
 constexpr int RIGHT_DRIVE_ENCODER_PORT_B = 3;
-constexpr int GANTRY_ENCODER_PORT_A = 0;
-constexpr int GANTRY_ENCODER_PORT_B = 0;
+constexpr int GANTRY_ENCODER_PORT_A = 5;
+constexpr int GANTRY_ENCODER_PORT_B = 4;
 
 
 /*Analog Ports*/

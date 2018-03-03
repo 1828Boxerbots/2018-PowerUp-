@@ -12,14 +12,35 @@ GantryMovementCmd::GantryMovementCmd()
 // Called just before this Command runs the first time
 void GantryMovementCmd::Initialize()
 {
-
+	time = new Timer();
+	time->Start();
+	previousTime = time->Get();
 }
-
 
 // Called repeatedly when this Command is scheduled to run
 
 void GantryMovementCmd::Execute()
 {
+	if(isRunning == true)
+	{
+		Wait(0.005);
+		return ;
+	}
+	isRunning = true;
+
+	double elapsedTime = time->Get();
+
+	double loopTime = (elapsedTime - previousTime) * 1000;
+	SmartDashboard::PutNumber("Loop Time: ", loopTime);
+
+	previousTime = elapsedTime;
+
+	Robot::gantry->PrintVars();
+
+
+	bool downMove = Robot::gantry->DownMovement(Robot::oi->GetJoystick());
+	bool upMove = Robot::gantry->UpMovement(Robot::oi->GetJoystick());
+
 	bool UpperLimitTripped = Robot::gantry->UpperLimitSwitchTripped();
 	bool LowerLimitTripped = Robot::gantry->LowerLimitSwitchTripped();
 
@@ -27,12 +48,18 @@ void GantryMovementCmd::Execute()
 	bool LowerPhotoTripped = Robot::gantry->LowerPhotoSensorTripped();
 
 	 //If gantry has not tripped either DIO/ exceeded it's height
-	 // =position: enter this case*/
+	 // =position: enter this case
+	if(LowerLimitTripped || LowerPhotoTripped)
+	{
+		Robot::gantry->UpMovement(Robot::oi->GetJoystick());
 
+		SmartDashboard::PutBoolean("In Lower Tripped: ", true);
+	}
+	else
+	{
 		if((!UpperLimitTripped && !LowerLimitTripped) && (!UpperPhotoTripped && !LowerPhotoTripped))
 		{
-			bool downMove = Robot::gantry->DownMovement(Robot::oi->GetJoystick());
-			bool upMove = Robot::gantry->UpMovement(Robot::oi->GetJoystick());
+			SmartDashboard::PutString("Limits Block", "We are there!");
 
 			//Neither DIO tripped or both buttons are pressed
 			if ((!downMove && !upMove) || (downMove && upMove))
@@ -53,22 +80,49 @@ void GantryMovementCmd::Execute()
 				}
 			}
 		}
-		//If a DIO has been tripped, then enter this loop
-		else
+	}
+	if(UpperLimitTripped || UpperPhotoTripped)
+	{
+		Robot::gantry->DownMovement(Robot::oi->GetJoystick());
+
+		SmartDashboard::PutBoolean("In Upper Tripped: ", true);
+	}
+	else
+	{
+		if((!UpperLimitTripped && !LowerLimitTripped) && (!UpperPhotoTripped && !LowerPhotoTripped))
 		{
-			//Checks if the lower DIO has been tripped
-			if(LowerLimitTripped || LowerPhotoTripped)
+			SmartDashboard::PutString("Limits Block", "We are there!");
+
+			//Neither DIO tripped or both buttons are pressed
+			if ((!downMove && !upMove) || (downMove && upMove))
 			{
-				Robot::gantry->UpMovement(Robot::oi->GetJoystick());
+				Robot::gantry->StopMotors();
 			}
-			//Checks if the upper DIO is tripped
-			if(UpperLimitTripped || UpperPhotoTripped)
+			//If the above statement is not true, enter this loop
+			else
 			{
-				Robot::gantry->DownMovement(Robot::oi->GetJoystick());
+				// Only one button is pressed; set motor accordingly
+				if (downMove == true)
+				{
+					Robot::gantry->DownMovement(Robot::oi->GetJoystick());
+				}
+				if (upMove == true)
+				{
+					Robot::gantry->UpMovement(Robot::oi->GetJoystick());
+				}
 			}
 		}
+	}
+	double runTime = time->Get();
+	double deltaTime = (runTime - elapsedTime) * 1000;
 
+	SmartDashboard::PutNumber("Loop Execution Time: ", deltaTime);
+
+	isRunning = false;
+
+	//elapsedTime = time->Reset();
 }
+
 
 // Make this return true when this Command no longer needs to run execute()
 bool GantryMovementCmd::IsFinished()

@@ -1,11 +1,13 @@
 #include "Wrist.h"
 #include "../RobotMap.h"
 
-Wrist::Wrist() : Subsystem("ExampleSubsystem") {
+Wrist::Wrist() : Subsystem("ExampleSubsystem")
+{
 
 }
 
-void Wrist::InitDefaultCommand() {
+void Wrist::InitDefaultCommand()
+{
 	// Set the default command for a subsystem here.
 	// SetDefaultCommand(new MySpecialCommand());
 }
@@ -25,6 +27,6 @@ void Wrist::Retract(XboxController* button)
 {
 	if(button->GetBumperReleased(GenericHID::kLeftHand))
 	{
-		wristSolenoid.Set(DoubleSolenoid::kForward);
+		wristSolenoid.Set(DoubleSolenoid::kReverse);
 	}
 }

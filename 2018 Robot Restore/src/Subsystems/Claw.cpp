@@ -24,15 +24,6 @@ void Claw::ManualCloseClaw(XboxController* button)
 	}
 }
 
-void Claw::AutomaticCloseClaw()
-{
-	if(m_clawDIO.Get() == true)
-	{
-		m_leftPincerPiston.Set(DoubleSolenoid::kForward);
-		m_rightPincerPiston.Set(DoubleSolenoid::kForward);
-	}
-}
-
 void Claw::OpenClaw(XboxController* button)
 {
 	if(button->GetBButtonPressed())
@@ -40,4 +31,10 @@ void Claw::OpenClaw(XboxController* button)
 		m_leftPincerPiston.Set(DoubleSolenoid::kReverse);
 		m_rightPincerPiston.Set(DoubleSolenoid::kReverse);
 	}
+}
+
+void Claw::SolenoidIdleing()
+{
+	m_leftPincerPiston.Set(DoubleSolenoid::kOff);
+	m_rightPincerPiston.Set(DoubleSolenoid::kOff);
 }

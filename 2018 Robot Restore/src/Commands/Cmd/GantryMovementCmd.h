@@ -3,6 +3,8 @@
 
 #include "Commands/Command.h"
 
+#include <Timer.h>
+
 using namespace frc;
 
 class GantryMovementCmd : public Command
@@ -10,10 +12,18 @@ class GantryMovementCmd : public Command
 public:
 	GantryMovementCmd();
 	void Initialize();
-	void Execute();
 	bool IsFinished();
 	void End();
 	void Interrupted();
+	void Execute();
+
+private:
+	void MarinasExecute();
+
+	Timer* time = NULL;
+	double previousTime = 0;
+
+	bool isRunning = false;
 };
 
 #endif  // GantryMovementCmd_H

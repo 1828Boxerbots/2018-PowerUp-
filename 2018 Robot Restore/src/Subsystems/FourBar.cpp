@@ -1,11 +1,19 @@
 #include "FourBar.h"
+#include "util.h"
 #include "../RobotMap.h"
 
-FourBar::FourBar() : Subsystem("ExampleSubsystem") {
+#include <WPILib.h>
+
+using namespace frc;
+using namespace Util;
+
+FourBar::FourBar() : Subsystem("ExampleSubsystem")
+{
 
 }
 
-void FourBar::InitDefaultCommand() {
+void FourBar::InitDefaultCommand()
+{
 	// Set the default command for a subsystem here.
 	// SetDefaultCommand(new MySpecialCommand());
 }
@@ -30,8 +38,6 @@ void FourBar::Movement(XboxController* controller)
 
 	m_leftGantryPID.SetSetpoint(kSetPoints[m_index]);
 	m_rightGantryPID.SetSetpoint(kSetPoints[m_index]);
-
-
 }
 
 void FourBar::SetInversions()
@@ -48,8 +54,30 @@ void FourBar::EnablePIDController()
 
 void FourBar::PIDControllerInit()
 {
-	m_leftGantryPID.SetInputRange(0, 5);
-	m_rightGantryPID.SetInputRange(0,5);
+	m_leftGantryPID.SetInputRange(0.0, 5.0);
+	m_rightGantryPID.SetInputRange(0.0,5.0);
 }
+/*
+void FourBar::SetAngle(int setpoint)
+{
+	if(setpoint >= 0)
+	{
+		if(setpoint >= SETPOINTSNUMBER)
+		{
+			setpoint = SETPOINTSNUMBER - 1;
+		}
+	}
+	else
+	{
+		setpoint = 0;
+	}
+	m_index = setpoint;
+	m_leftGantryPID.SetSetpoint(kSetPoints[m_index]);
+	m_rightGantryPID.SetSetpoint(kSetPoints[m_index]);
 
-constexpr std::array<double, 3> FourBar::kSetPoints;
+	// Waiting until the potentionmeter reads the set point.
+	while(NotEqual(m_pot.GetVoltage(), ))
+}
+*/
+
+constexpr std::array<double, FourBar::SETPOINTSNUMBER> FourBar::kSetPoints;

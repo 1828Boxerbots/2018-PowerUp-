@@ -1,11 +1,13 @@
 #include "Compressor.h"
 #include "../RobotMap.h"
 
-OnBoardCompressor::OnBoardCompressor() : Subsystem("ExampleSubsystem") {
+OnBoardCompressor::OnBoardCompressor() : Subsystem("ExampleSubsystem")
+{
 
 }
 
-void OnBoardCompressor::InitDefaultCommand() {
+void OnBoardCompressor::InitDefaultCommand()
+{
 	// Set the default command for a subsystem here.
 	// SetDefaultCommand(new MySpecialCommand());
 }
