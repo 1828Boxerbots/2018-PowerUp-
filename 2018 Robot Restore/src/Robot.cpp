@@ -21,7 +21,8 @@ shared_ptr<OnBoardCompressor> Robot::compressor = make_shared<OnBoardCompressor>
 shared_ptr<Climber> Robot::climber = make_shared<Climber>();
 shared_ptr<Claw> Robot::claw = make_shared<Claw>();
 shared_ptr<Vision> Robot::vision = make_shared<Vision>();
-shared_ptr<FourBar> Robot::fourbar = make_shared<FourBar>();
+//shared_ptr<FourBar> Robot::fourbar = make_shared<FourBar>();
+shared_ptr<Intake> Robot::intake = make_shared<Intake>();
 
 shared_ptr<OI> Robot::oi = make_shared<OI>();
 
@@ -78,7 +79,11 @@ void Robot::TeleopInit()
 
 	//m_fourBar.Start();
 
-	//m_gantry.Start();
+	m_gantry.Start();
+
+	m_intake.Start();
+
+	m_outtake.Start();
 
 	time = new Timer();
 	previousTime = time->Get();

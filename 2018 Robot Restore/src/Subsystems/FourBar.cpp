@@ -6,7 +6,7 @@
 
 using namespace frc;
 using namespace Util;
-
+/*
 FourBar::FourBar() : Subsystem("ExampleSubsystem")
 {
 
@@ -42,8 +42,8 @@ void FourBar::Movement(XboxController* controller)
 
 void FourBar::SetInversions()
 {
-	m_leftFourBarMotor.SetInverted(false);
-	m_rightFourBarMotor.SetInverted(true);
+	//m_leftFourBarMotor.SetInverted(false);
+	//m_rightFourBarMotor.SetInverted(true);
 }
 
 void FourBar::EnablePIDController()
@@ -57,7 +57,7 @@ void FourBar::PIDControllerInit()
 	m_leftGantryPID.SetInputRange(0.0, 5.0);
 	m_rightGantryPID.SetInputRange(0.0,5.0);
 }
-/*
+
 void FourBar::SetAngle(int setpoint)
 {
 	if(setpoint >= 0)
@@ -78,6 +78,7 @@ void FourBar::SetAngle(int setpoint)
 	// Waiting until the potentionmeter reads the set point.
 	while(NotEqual(m_pot.GetVoltage(), ))
 }
-*/
+
 
 constexpr std::array<double, FourBar::SETPOINTSNUMBER> FourBar::kSetPoints;
+*/

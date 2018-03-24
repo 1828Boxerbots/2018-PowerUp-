@@ -20,6 +20,8 @@
 #include "Commands/Cmd/TeleopDriveCmd.h"
 #include "Commands/Cmd/GantryMovementCmd.h"
 #include "Commands/Cmd/FourBarCmd.h"
+#include "Commands/Cmd/IntakeCmd.h"
+#include "Commands/Cmd/OuttakeCmd.h"
 
 #include "Subsystems/Drivetrain.h"
 #include "Subsystems/Wrist.h"
@@ -29,6 +31,7 @@
 #include "Subsystems/Gantry.h"
 #include "Subsystems/Vision.h"
 #include "Subsystems/FourBar.h"
+#include "Subsystems/Intake.h"
 
 #include "OI.h"
 
@@ -46,7 +49,8 @@ public:
 	static shared_ptr<Claw> claw;
 	static shared_ptr<Gantry> gantry;
 	static shared_ptr<Vision> vision;
-	static shared_ptr<FourBar> fourbar;
+	static shared_ptr<Intake> intake;
+	//static shared_ptr<FourBar> fourbar;
 
 	static shared_ptr<OI> oi;
 
@@ -54,7 +58,9 @@ private:
 
 	TeleopDriveCmd m_drive;
 	GantryMovementCmd m_gantry;
-	FourBarCmd m_fourBar;
+	IntakeCmd m_intake;
+	OuttakeCmd m_outtake;
+	//FourBarCmd m_fourBar;
 
 	Timer* time = NULL;
 

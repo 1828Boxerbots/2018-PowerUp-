@@ -30,8 +30,8 @@ constexpr int LEFT_DRIVE_TEST_PORT = 9;
 constexpr int RIGHT_DRIVE_MOTOR_PORT = 4;
 constexpr int RIGHT_DRIVE_TEST_PORT = 9;
 constexpr int GANTRY_MOTOR_PORT = 2;
-constexpr int LEFT_FOUR_BAR_MOTOR_PORT = 0;
-constexpr int RIGHT_FOUR_BAR_MOTOR_PORT = 1;
+constexpr int LEFT_MANDIBLE_PORT = 0;
+constexpr int RIGHT_MANDIBLE_PORT = 1;
 
 /*Compressor Port*/
 constexpr int COMPRESSOR_PORT = 0;

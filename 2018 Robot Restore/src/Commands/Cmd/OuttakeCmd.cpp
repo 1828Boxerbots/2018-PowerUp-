@@ -1,39 +1,36 @@
-#include "FourBarCmd.h"
+#include "OuttakeCmd.h"
 #include "Robot.h"
-/*
-FourBarCmd::FourBarCmd() {
+
+OuttakeCmd::OuttakeCmd() {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
-	Requires(Robot::fourbar.get());
+	Requires(Robot::intake.get());
 }
 
 // Called just before this Command runs the first time
-void FourBarCmd::Initialize()
+void OuttakeCmd::Initialize()
 {
-	Robot::fourbar->SetInversions();
-	Robot::fourbar->PIDControllerInit();
-	Robot::fourbar->EnablePIDController();
+	Robot::intake->MotorInit();
 }
 
 // Called repeatedly when this Command is scheduled to run
-void FourBarCmd::Execute()
+void OuttakeCmd::Execute()
 {
-	Robot::fourbar->Movement(Robot::oi->GetJoystick());
+	Robot::intake->OutPut(Robot::oi->GetJoystick());
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool FourBarCmd::IsFinished() {
+bool OuttakeCmd::IsFinished() {
 	return false;
 }
 
 // Called once after isFinished returns true
-void FourBarCmd::End() {
+void OuttakeCmd::End() {
 
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void FourBarCmd::Interrupted() {
+void OuttakeCmd::Interrupted() {
 
 }
-*/

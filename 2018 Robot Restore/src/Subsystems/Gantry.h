@@ -35,8 +35,8 @@ private:
 public:
 	Gantry();
 	void InitDefaultCommand();
-	bool UpMovement(XboxController* trigger);
-	bool DownMovement(XboxController* trigger);
+	bool UpMovement(XboxController* button);
+	bool DownMovement(XboxController* button);
 	void StopMotors();
 	bool UpperLimitSwitchTripped();
 	bool LowerLimitSwitchTripped();

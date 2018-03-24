@@ -39,8 +39,9 @@ void Gantry::InitDefaultCommand()
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
 
-bool Gantry::UpMovement(XboxController* trigger)
+bool Gantry::UpMovement(XboxController* button)
 {
+	/*
 	double triggerAxis = trigger->GetTriggerAxis(GenericHID::kRightHand);
 
 	SmartDashboard::PutNumber("RightTrigger", triggerAxis);
@@ -53,10 +54,29 @@ bool Gantry::UpMovement(XboxController* trigger)
 		m_gantryMotor.Set(-triggerAxis);
 	}
 	return isTriggered;
+	*/
+
+	bool buttonPressed = button->GetBumperPressed(GenericHID::kRightHand);
+	bool buttonReleased = button->GetBumperReleased(GenericHID::kRightHand);
+	bool value = false;
+
+	if(buttonPressed)
+	{
+		m_gantryMotor.Set(-0.25);
+		value = true;
+	}
+	else
+		if(buttonReleased)
+		{
+			m_gantryMotor.Set(0);
+			value = false;
+		}
+	return value;
 }
 
-bool Gantry::DownMovement(XboxController* trigger)
+bool Gantry::DownMovement(XboxController* button)
 {
+	/*
 	double triggerAxis = trigger->GetTriggerAxis(GenericHID::kLeftHand);
 
 	SmartDashboard::PutNumber("LeftTrigger", triggerAxis);
@@ -69,6 +89,23 @@ bool Gantry::DownMovement(XboxController* trigger)
 		m_gantryMotor.Set(-triggerAxis);
 	}
 	return isTriggered;
+	*/
+	bool buttonPressed = button->GetBumperPressed(GenericHID::kLeftHand);
+	bool buttonReleased = button->GetBumperReleased(GenericHID::kLeftHand);
+	bool value = false;
+
+	if(buttonPressed)
+	{
+		m_gantryMotor.Set(0.25);
+		value = true;
+	}
+	else
+		if(buttonReleased)
+		{
+			m_gantryMotor.Set(0);
+			value = false;
+		}
+	return value;
 }
 
 void Gantry::StopMotors()
